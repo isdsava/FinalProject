@@ -9,8 +9,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".JokeActivity">
     <TextView
+        android:id="@+id/jokeReq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wa;lk into bar"/>
-
+       android:onClick="showPunch"
+        />
+    <TextView
+        android:id="@+id/punchline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jokeReq"
+        android:visibility="invisible"
+        />
 </RelativeLayout>

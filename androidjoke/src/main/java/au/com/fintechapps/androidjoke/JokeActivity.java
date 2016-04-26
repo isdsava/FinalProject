@@ -1,9 +1,12 @@
 package au.com.fintechapps.androidjoke;
 
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class JokeActivity extends ActionBarActivity {
 
@@ -11,6 +14,15 @@ public class JokeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_droid);
+
+        String jokeReq = getIntent().getStringExtra("jokeReq");
+        String jokePunch = getIntent().getStringExtra("punchline");
+
+        TextView textView = (TextView) findViewById(R.id.jokeReq);
+                textView.setText(jokeReq);
+
+        TextView textView2 = (TextView) findViewById(R.id.punchline);
+                textView2.setText(jokePunch);
     }
 
     @Override
@@ -35,4 +47,9 @@ public class JokeActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showPunch(View view){
+
+        TextView textView = (TextView) view.findViewById(R.id.punchline);
+                textView.setVisibility(View.VISIBLE);
+    }
 }

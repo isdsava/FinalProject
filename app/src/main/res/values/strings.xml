@@ -5,4 +5,9 @@
     <string name="button_text_two">Felch</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string-array name="me_jokes_array">
+        <item>Just a warm up</item>
+        <item>Almost funny</item>
+        <item>Best we got</item>
+    </string-array>
 </resources>

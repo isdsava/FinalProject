@@ -7,13 +7,15 @@ import android.util.Pair;
 
 import java.util.concurrent.CountDownLatch;
 
+import au.com.fintechapps.gcebackend.jokeApi.model.JokeBean;
+
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ApplicationTestCase<Application> {
+public class ApplicationTest extends ApplicationTestCase<Application> implements GceAsyncTask.GceTaskListener<JokeBean>{
 
     CountDownLatch signal = null;
-    String mJoke = null;
+    JokeBean  mJoke = null;
 
     public ApplicationTest() {
         super(Application.class);
@@ -32,22 +34,27 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     public void  testMeTask() throws InterruptedException {
 
-        GceAsyncTask gceAsyncTask = new GceAsyncTask();
+        GceAsyncTask gceAsyncTask = new GceAsyncTask(getContext(),this);
 
-         Pair<Context,String> mePair = new Pair<Context,String>(getContext(),"freddy");
-
-        GceAsyncTask.GceTaskListener gceTaskListener = new GceAsyncTask.GceTaskListener() {
+        /**GceAsyncTask.GceTaskListener gceTaskListener = new GceAsyncTask.GceTaskListener() {
             @Override
-            public void onComplete(String joke, Exception eJoked) {
+            public void onComplete(JokeBean joke, Exception eJoked) {
                 mJoke = joke;
                 signal.countDown();
             }
         };
 
-        gceAsyncTask.setListener(gceTaskListener);
-        gceAsyncTask.execute(mePair);
+        gceAsyncTask.setListener(gceTaskListener);**/
+        gceAsyncTask.execute(getContext());
         signal.await();
 
-        assertTrue(mJoke.startsWith("fart"));
+        String zeJoke = mJoke.getJokeArray().get(0).get(0);
+         assertTrue(zeJoke.startsWith("Horse"));
+        }
+
+    @Override
+    public void onComplete(JokeBean joke, Exception eJoked) {
+        mJoke = joke;
+        signal.countDown();
     }
 }

@@ -8,16 +8,29 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.InterstitialAd;
+
 import au.com.fintechapps.androidjoke.JokeActivity;
+import au.com.fintechapps.gcebackend.jokeApi.model.JokeBean;
 import au.com.fintechapps.javajoshingredux.Joshing;
 
 
 
 
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceTaskListener<JokeBean>,MainActivityFragment.OnInterResult,MainActivityFragment.OnJokeChosenListener{
+
+    private JokeBean jokeBean =null;
+    private Intent primeIntent;
+    private boolean statialFacial=false;
+    private InterstitialAd mInterstatialAd;
+    private int mJokeNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +41,14 @@ public class MainActivity extends ActionBarActivity {
             MainActivityFragment fraggie = new MainActivityFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fraggie).commit();
 
+        GceAsyncTask gceAsyncTask = new GceAsyncTask(getApplicationContext(),this);
 
-        new GceAsyncTask().execute(new Pair<Context, String>(this,"freddy"));
+
+            gceAsyncTask.execute(getApplicationContext());
+
+
+
+
     }
 
 
@@ -55,11 +74,19 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
+    public void tellJoke(){
 
-        Joshing derp = new Joshing();
+       if (jokeBean!=null) {
 
-        Toast.makeText(this, derp.joshOn(), Toast.LENGTH_SHORT).show();
+           primeIntent.putExtra("jokeReq",jokeBean.getJokeArray().get(mJokeNo).get(0));
+           primeIntent.putExtra("punchline",jokeBean.getJokeArray().get(mJokeNo).get(1));
+           startActivity(primeIntent);
+
+           if  (BuildConfig.VERSION.equals("FREE") && statialFacial) {
+               mInterstatialAd.show();
+
+           }
+       }
     }
 
 public void droiding(View view){
@@ -67,4 +94,30 @@ public void droiding(View view){
     Intent felch = new Intent(this, JokeActivity.class);
     startActivity(felch);
 }
+
+
+    @Override
+    public void onComplete(JokeBean joke, Exception eJoked) {
+
+        jokeBean = joke;
+        primeIntent = new Intent(this, JokeActivity.class);
+
+    }
+
+    @Override
+    public void onResult(boolean result,InterstitialAd iA) {
+
+        statialFacial = result;
+                if (result){
+                    mInterstatialAd = iA;
+                }
+    }
+
+
+    @Override
+    public void onJokeChosen(int jokeNo) {
+        mJokeNo = jokeNo;
+        tellJoke();
+
+    }
 }

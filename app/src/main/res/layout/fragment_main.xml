@@ -24,15 +24,11 @@
 
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttone"
-        android:text="@string/button_text_two"
-        android:onClick="droiding"
-
-        />
-
+ <Spinner
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:id="@+id/jokeSpin"
+     android:layout_below="@+id/buttone"></Spinner>
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
