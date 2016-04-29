@@ -2,6 +2,7 @@
     <string name="app_name">AndroidJoke</string>
     <string name="action_settings">ee</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-
+    <string name="joke_waffle">Funny bone - duly warned......</string>
+    <string name="joke_prompt">Tap below to see the punchline</string>
 
 </resources>

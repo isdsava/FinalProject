@@ -26,6 +26,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,11 +43,8 @@ android {
 
 
 
-
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //ad mob
     compile project(':javajoshingredux')
     compile project(':androidjoke')
     compile 'com.android.support:appcompat-v7:23.2.0'
@@ -54,7 +52,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile project(path: ':gcebackend', configuration: 'android-endpoints')
     testCompile 'junit:junit:4.12'
-   // testCompile 'com.google.appengine:appengine-tools-sdk:1.9.34'
     androidTestCompile 'com.android.support:support-annotations:23.2.0'
     androidTestCompile 'com.android.support.test:runner:0.4'
     // Set this dependency to use JUnit 4 rules
@@ -64,6 +61,5 @@ dependencies {
     // Set this dependency to build and run UI Automator tests
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
-    //compile files('libs/appengine-api.jar')
 }
 

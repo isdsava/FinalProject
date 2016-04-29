@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,13 +32,15 @@ public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceT
     private boolean statialFacial=false;
     private InterstitialAd mInterstatialAd;
     private int mJokeNo;
+    private ProgressBar mProg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+            mProg = (ProgressBar) findViewById(R.id.progressBar);
+            mProg.setVisibility(View.VISIBLE);
             MainActivityFragment fraggie = new MainActivityFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fraggie).commit();
 
@@ -74,33 +77,13 @@ public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceT
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(){
-
-       if (jokeBean!=null) {
-
-           primeIntent.putExtra("jokeReq",jokeBean.getJokeArray().get(mJokeNo).get(0));
-           primeIntent.putExtra("punchline",jokeBean.getJokeArray().get(mJokeNo).get(1));
-           startActivity(primeIntent);
-
-           if  (BuildConfig.VERSION.equals("FREE") && statialFacial) {
-               mInterstatialAd.show();
-
-           }
-       }
-    }
-
-public void droiding(View view){
-
-    Intent felch = new Intent(this, JokeActivity.class);
-    startActivity(felch);
-}
-
 
     @Override
     public void onComplete(JokeBean joke, Exception eJoked) {
 
         jokeBean = joke;
         primeIntent = new Intent(this, JokeActivity.class);
+        mProg.setVisibility(View.INVISIBLE);
 
     }
 
@@ -117,7 +100,21 @@ public void droiding(View view){
     @Override
     public void onJokeChosen(int jokeNo) {
         mJokeNo = jokeNo;
-        tellJoke();
+
+        if (jokeBean!=null) {
+
+            primeIntent.putExtra("jokeReq",jokeBean.getJokeArray().get(mJokeNo).get(0));
+            primeIntent.putExtra("punchline",jokeBean.getJokeArray().get(mJokeNo).get(1));
+            startActivity(primeIntent);
+
+            if  (BuildConfig.VERSION.equals("FREE") && statialFacial) {
+                mInterstatialAd.show();
+
+            }
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Please make sure you are connected AND have started the GCE server",Toast.LENGTH_LONG).show();
+        }
 
     }
 }

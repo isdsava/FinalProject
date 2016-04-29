@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class JokeActivity extends ActionBarActivity {
@@ -18,8 +19,8 @@ public class JokeActivity extends ActionBarActivity {
         String jokeReq = getIntent().getStringExtra("jokeReq");
         String jokePunch = getIntent().getStringExtra("punchline");
 
-        TextView textView = (TextView) findViewById(R.id.jokeReq);
-                textView.setText(jokeReq);
+        Button button = (Button) findViewById(R.id.jokeReq);
+                button.setText(jokeReq);
 
         TextView textView2 = (TextView) findViewById(R.id.punchline);
                 textView2.setText(jokePunch);
@@ -49,7 +50,8 @@ public class JokeActivity extends ActionBarActivity {
 
     public void showPunch(View view){
 
-        TextView textView = (TextView) view.findViewById(R.id.punchline);
+
+        TextView textView = (TextView) view.getRootView().findViewById(R.id.punchline);
                 textView.setVisibility(View.VISIBLE);
     }
 }

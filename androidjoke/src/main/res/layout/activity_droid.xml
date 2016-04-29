@@ -9,16 +9,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".JokeActivity">
     <TextView
-        android:id="@+id/jokeReq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/joke_waffle"
+        android:textSize="@dimen/header_font"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:id="@+id/waffle"
+        android:paddingStart="@dimen/bit_o_padding"
+        android:paddingLeft="@dimen/bit_o_padding"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:onClick="showPunch"
-        />
+        android:id="@+id/prompt"
+        android:textStyle="italic"
+        android:text="@string/joke_prompt"
+        android:layout_below="@+id/waffle"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/bit_o_padding"
+        android:paddingLeft="@dimen/bit_o_padding"/>
+
+    <Button
+        android:id="@+id/jokeReq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showPunch"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_font"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/prompt"
+        android:gravity="start"/>
     <TextView
         android:id="@+id/punchline"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/jokeReq"
         android:visibility="invisible"
-        />
+        android:textSize="@dimen/text_font"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/bit_o_padding"
+        android:paddingLeft="@dimen/bit_o_padding"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin" />
 </RelativeLayout>

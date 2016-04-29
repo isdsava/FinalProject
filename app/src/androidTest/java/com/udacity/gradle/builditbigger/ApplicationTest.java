@@ -35,19 +35,10 @@ public class ApplicationTest extends ApplicationTestCase<Application> implements
     public void  testMeTask() throws InterruptedException {
 
         GceAsyncTask gceAsyncTask = new GceAsyncTask(getContext(),this);
-
-        /**GceAsyncTask.GceTaskListener gceTaskListener = new GceAsyncTask.GceTaskListener() {
-            @Override
-            public void onComplete(JokeBean joke, Exception eJoked) {
-                mJoke = joke;
-                signal.countDown();
-            }
-        };
-
-        gceAsyncTask.setListener(gceTaskListener);**/
         gceAsyncTask.execute(getContext());
         signal.await();
 
+        // Get the  first joke, should start with horse
         String zeJoke = mJoke.getJokeArray().get(0).get(0);
          assertTrue(zeJoke.startsWith("Horse"));
         }

@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply plugin: 'war'
 apply plugin: 'java'
-apply plugin: 'appengine'
+
 
 
 
@@ -15,9 +15,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.0.0'
-        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.34'
-
-
        // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -29,58 +26,7 @@ allprojects {
         mavenCentral()
     }
 
-
-
-    dependencies {
-
-        //classpath 'com.google.appengine:gradle-appengine-plugin:1.9.18'
-        //    appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
-        //  compile "javax.servlet:servlet-api:2.5"
-        ///compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
-
-    }
-
-//sourceSets {
-    // androidTest {
-    //  java {
-    // srcDir 'src/androidTest'
-    // }
-    // }
-//}
 }
-
-/**appengine {
-
-    httpPort = 8080
-    daemon=true
-    jvmFlags = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8088']
-
-    warDir =  file('/gcebackend/build/exploded-app')
-
-
-}
-//configurations {
-  //  unitTestCompile.extendsFrom runtime
-    //unitTestRuntime.extendsFrom unitTestCompile
-//}**/
-
-// add to dependancies
-dependencies {
-
-    //...
-
-  //  unitTestCompile files("$project.buildDir/classes/release")
-   // unitTestCompile 'junit:junit:4.8.2'
-}
-
-// add a new unitTest sourceSet
-/**sourceSets {
-   fartTest {
-      java.srcDir file('src/test/java')
-   //     resources.srcDir file('src/test/resources')
-    }
-}**/
-
 task zeTest(){
     dependsOn = ['startMeGce','testMeAndroid','stopMeGce']
     evaluationDependsOn 'gcebackend'
@@ -94,7 +40,7 @@ task zeTest(){
 
         doLast {
 
-            println 'oh god that was nasty'
+            println 'Thank your mother for the rabbits!'
         }
     }
 
@@ -113,10 +59,6 @@ task zeTest(){
             mustRunAfter  testMeAndroid
     }
 
-
-  //  description = 'run unit tests'
-    //testClassesDir = project.sourceSets.unitTest.output.classesDir
-    //classpath = project.sourceSets.unitTest.runtimeClasspath
 
 
 

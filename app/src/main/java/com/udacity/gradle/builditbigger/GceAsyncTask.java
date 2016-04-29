@@ -38,7 +38,7 @@ public class GceAsyncTask extends AsyncTask<Context,Void,JokeBean>{
         if(jokeApi==null){
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),new AndroidJsonFactory(),null)
                                 //.setRootUrl("https://gcebeckendproject.appspot.com/_ah/api/");
-
+                    //change to localhost where need for tesing on emaluator
                     .setRootUrl("http://10.0.0.3:8080/_ah/api/")
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
