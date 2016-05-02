@@ -3,7 +3,7 @@ package au.com.fintechapps.javajoshingredux;
 public class Joshing {
 
 
-    public String[][] meJokes(){
+    public String[][] meJokes() {
         String[][] passMe = new String[3][2];
 
         passMe[0][0] = "Horse walks into bar. Barman say's why the long face. ";

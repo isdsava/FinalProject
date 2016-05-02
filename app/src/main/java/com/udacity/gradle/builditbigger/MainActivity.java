@@ -21,15 +21,11 @@ import au.com.fintechapps.gcebackend.jokeApi.model.JokeBean;
 import au.com.fintechapps.javajoshingredux.Joshing;
 
 
+public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceTaskListener<JokeBean>, MainActivityFragment.OnInterResult, MainActivityFragment.OnJokeChosenListener {
 
-
-
-
-public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceTaskListener<JokeBean>,MainActivityFragment.OnInterResult,MainActivityFragment.OnJokeChosenListener{
-
-    private JokeBean jokeBean =null;
+    private JokeBean jokeBean = null;
     private Intent primeIntent;
-    private boolean statialFacial=false;
+    private boolean statialFacial = false;
     private InterstitialAd mInterstatialAd;
     private int mJokeNo;
     private ProgressBar mProg;
@@ -39,17 +35,15 @@ public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            mProg = (ProgressBar) findViewById(R.id.progressBar);
-            mProg.setVisibility(View.VISIBLE);
-            MainActivityFragment fraggie = new MainActivityFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fraggie).commit();
+        mProg = (ProgressBar) findViewById(R.id.progressBar);
+        mProg.setVisibility(View.VISIBLE);
+        MainActivityFragment fraggie = new MainActivityFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fraggie).commit();
 
-        GceAsyncTask gceAsyncTask = new GceAsyncTask(getApplicationContext(),this);
-
-
-            gceAsyncTask.execute(getApplicationContext());
+        GceAsyncTask gceAsyncTask = new GceAsyncTask(getApplicationContext(), this);
 
 
+        gceAsyncTask.execute(getApplicationContext());
 
 
     }
@@ -88,12 +82,12 @@ public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceT
     }
 
     @Override
-    public void onResult(boolean result,InterstitialAd iA) {
+    public void onResult(boolean result, InterstitialAd iA) {
 
         statialFacial = result;
-                if (result){
-                    mInterstatialAd = iA;
-                }
+        if (result) {
+            mInterstatialAd = iA;
+        }
     }
 
 
@@ -101,19 +95,18 @@ public class MainActivity extends ActionBarActivity implements GceAsyncTask.GceT
     public void onJokeChosen(int jokeNo) {
         mJokeNo = jokeNo;
 
-        if (jokeBean!=null) {
+        if (jokeBean != null) {
 
-            primeIntent.putExtra("jokeReq",jokeBean.getJokeArray().get(mJokeNo).get(0));
-            primeIntent.putExtra("punchline",jokeBean.getJokeArray().get(mJokeNo).get(1));
+            primeIntent.putExtra("jokeReq", jokeBean.getJokeArray().get(mJokeNo).get(0));
+            primeIntent.putExtra("punchline", jokeBean.getJokeArray().get(mJokeNo).get(1));
             startActivity(primeIntent);
 
-            if  (BuildConfig.VERSION.equals("FREE") && statialFacial) {
+            if (BuildConfig.VERSION.equals("FREE") && statialFacial) {
                 mInterstatialAd.show();
 
             }
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"Please make sure you are connected AND have started the GCE server",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please make sure you are connected AND have started the GCE server", Toast.LENGTH_LONG).show();
         }
 
     }

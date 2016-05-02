@@ -28,11 +28,11 @@ public class MainActivityFragment extends Fragment {
     String[] mJokeArray;
 
     public interface OnInterResult {
-        public void onResult(boolean result,InterstitialAd iA);
+        public void onResult(boolean result, InterstitialAd iA);
     }
 
     public interface OnJokeChosenListener {
-                public void onJokeChosen(int jokeNo);
+        public void onJokeChosen(int jokeNo);
     }
 
     public MainActivityFragment() {
@@ -46,7 +46,8 @@ public class MainActivityFragment extends Fragment {
         try {
             mCallResult = (OnInterResult) getActivity();
             mJokeChosen = (OnJokeChosenListener) getActivity();
-        }catch (ClassCastException e){}
+        } catch (ClassCastException e) {
+        }
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MainActivityFragment extends Fragment {
         //Kill it for paid straight away
 
 
-        if  (BuildConfig.VERSION.equals("FREE")) {
+        if (BuildConfig.VERSION.equals("FREE")) {
             AdView mAdView = (AdView) root.findViewById(R.id.adView);
             // Create an ad request. Check logcat output for the hashed device ID to
             // get test ads on a physical device. e.g.
@@ -94,12 +95,13 @@ public class MainActivityFragment extends Fragment {
 
             AdRequest adStatialRequest = new AdRequest.Builder().build();
 
-            interstitialAd.loadAd(adStatialRequest);}
+            interstitialAd.loadAd(adStatialRequest);
+        }
 
         mJokeArray = getResources().getStringArray(R.array.me_jokes_array);
 
-        ArrayAdapter<String> adapter =  new ArrayAdapter<String>(getContext(),R.layout.list_joke,mJokeArray);
-         ListView listView = (ListView) root.findViewById(R.id.jokeList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.list_joke, mJokeArray);
+        ListView listView = (ListView) root.findViewById(R.id.jokeList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,8 +110,8 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-    return root;
+        return root;
 
-}
+    }
 
 }

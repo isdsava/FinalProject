@@ -1,6 +1,6 @@
 1)Special thanks to Gaurav Sobti from the developer group who delivered me from gradle hell
 
-2)You will need to change the IP address to run the connected tests. This if you are using an emulator localhost will do.
+2)You will need to change the IP address to run the connected tests, if you using an emulator changed GCEAsynceTask to 10.0.2.2. Also detailed in TODO
 
 2A) Connected tests task is called zeTest()
 

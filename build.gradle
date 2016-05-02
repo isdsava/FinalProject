@@ -40,7 +40,7 @@ task zeTest(){
 
         doLast {
 
-            println 'Thank your mother for the rabbits!'
+            println 'Thank your mother for the rabbits! It is done'
         }
     }
 
